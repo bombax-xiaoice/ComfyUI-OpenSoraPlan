@@ -24,7 +24,7 @@ Legacy versions need some more files to be downloaded, or just wait for the firs
 huggingface-cli download LanguageBind/Open-Sora-Plan-v1.2.0 --local-dir ComfyUI-OpenSoraPlan/models/Open-Sora-Plan-v1.2.0
 huggingface-cli download LanguageBind/Open-Sora-Plan-v1.1.0 --local-dir ComfyUI-OpenSoraPlan/models/Open-Sora-Plan-v1.1.0
 huggingface-cli download LanguageBind/Open-Sora-Plan-v1.0.0 --local-dir ComfyUI-OpenSoraPlan/models/Open-Sora-Plan-v1.0.0
-huggingface-cli download DeepFloyd/t5-v1_1-xxl --local-dir ComfyUI-OpenSoraPlan/models/t5-v1_1-xxl
+huggingface-cli download google/t5-v1_1-xxl --local-dir ComfyUI-OpenSoraPlan/models/t5-v1_1-xxl
 ```
 
 
@@ -52,3 +52,19 @@ model files can be automatically downloaded from huggingface to custom_nodes/Com
 4. OpenSoraPlanV1.2 Text-to-Video allow either one `start_image`, or a pair of `start_image` and `end_image` as reference. Both in ComfyUI's IMAGE type.
 
 5. Original implementation of OpenSoraPlanV1.3 WFVAE only supports temporal tiling but does not support spatial tiling as older versions do. This ComfyUI implementation fix this issue by adding additional `reflect` padding to the bottom-right corner, then tailor the results back to its expected size after 2D-tiled encoding/decoding.
+
+## OpenSoraPlan V1.3 Image-to-Video Examples
+
+Input one image as reference of the starting frame
+<img src="example-workflow-opensoraplan3-i2v.png" raw="true" />
+
+Output of one reference image
+
+https://github.com/user-attachments/assets/66eb5666-efd3-43ea-a6ab-b90e3d0c4b71
+
+Input two images as references of the starting frame and the ending frame
+<img src="example-workflow-opensoraplan3-2i2v.png" raw="true" />
+
+Output of two reference images
+
+https://github.com/user-attachments/assets/8e94f804-d5b2-4547-8b09-b960a7af2f99
