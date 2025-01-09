@@ -1,0 +1,15 @@
+[project]
+name = "opensoraplan"
+description = "Another comfy implementation for the short video generation project PKU-YuanGroup/Open-Sora-Plan, supporting latest 1.3.0 and 1.2.0 and image to video feature, etc."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["albumentations", "av", "decord", "einops", "gdown", "h5py", "idna", "imageio", "matplotlib", "omegaconf", "opencv-python", "opencv-python-headless", "pandas", "pillow", "pydub", "pytorch-lightning", "pytorchvideo", "PyYAML", "regex", "requests", "scikit-learn", "scipy", "six", "test-tube", "timm", "torchdiffeq", "torchmetrics", "tqdm", "urllib3", "uvicorn", "diffusers", "scikit-video", "imageio-ffmpeg", "sentencepiece", "beautifulsoup4", "ftfy", "moviepy", "wandb", "tensorboard", "accelerate", "huggingface-hub"]
+
+[project.urls]
+Repository = "https://github.com/bombax-xiaoice/ComfyUI-OpenSoraPlan"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-OpenSoraPlan"
+Icon = ""
