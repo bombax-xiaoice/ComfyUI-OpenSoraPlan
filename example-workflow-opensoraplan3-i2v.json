@@ -1,0 +1,361 @@
+{
+  "last_node_id": 25,
+  "last_link_id": 34,
+  "nodes": [
+    {
+      "id": 4,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1487.130126953125,
+        289.2568359375
+      ],
+      "size": [
+        315,
+        860.3636474609375
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4,
+          "shape": 7
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "AnimateDiff_00270.mp4",
+            "subfolder": "",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 8
+          }
+        }
+      }
+    },
+    {
+      "id": 18,
+      "type": "LoadImage",
+      "pos": [
+        280.7103576660156,
+        593.789794921875
+      ],
+      "size": [
+        210,
+        316.12957763671875
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            23
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "spaceship (1).png",
+        "image"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "OpenSoraPlan3LoaderI2V",
+      "pos": [
+        290.2936096191406,
+        287.127197265625
+      ],
+      "size": [
+        415.8000183105469,
+        250
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OpenSoraPlanModel",
+          "type": "OpenSoraPlanModel",
+          "links": [
+            25,
+            26
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OpenSoraPlan3LoaderI2V"
+      },
+      "widgets_values": [
+        "/home/zhouli/ComfyUI/custom_nodes/ComfyUI-OpenSoraPlan/models/Open-Sora-Plan-v1.3.0",
+        "WFVAEModel_D8_4x8x8",
+        "/home/zhouli/ComfyUI/custom_nodes/ComfyUI-OpenSoraPlan/models/mt5-xxl",
+        "/home/zhouli/ComfyUI/custom_nodes/ComfyUI-OpenSoraPlan/models/CLIP-ViT-bigG-14-laion2B-39B-b160k",
+        "any93x640x640_i2v",
+        352,
+        640,
+        93,
+        "EulerAncestralDiscrete"
+      ]
+    },
+    {
+      "id": 19,
+      "type": "ImageScale",
+      "pos": [
+        502.1888122558594,
+        590.59521484375
+      ],
+      "size": [
+        210,
+        130
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            33
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        352,
+        640,
+        "center"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "OpenSoraPlanDecoder",
+      "pos": [
+        1144.263671875,
+        289.2569580078125
+      ],
+      "size": [
+        315,
+        126
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "OpenSoraPlanModel",
+          "link": 25
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            4
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OpenSoraPlanDecoder"
+      },
+      "widgets_values": [
+        true,
+        32,
+        16
+      ]
+    },
+    {
+      "id": 16,
+      "type": "OpenSoraPlan3SamplerI2V",
+      "pos": [
+        758.8058471679688,
+        356.33929443359375
+      ],
+      "size": [
+        352.79998779296875,
+        578
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "OpenSoraPlanModel",
+          "link": 26
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 33
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            22
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OpenSoraPlan3SamplerI2V"
+      },
+      "widgets_values": [
+        "",
+        "A spaceship is flying in the outer space, stars are shining in the background, the milky way is in the middle of the background",
+        "too small spaceship, too small object",
+        20,
+        10,
+        0,
+        "fixed",
+        true,
+        true,
+        true,
+        true,
+        0,
+        8
+      ]
+    }
+  ],
+  "links": [
+    [
+      4,
+      3,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      22,
+      16,
+      0,
+      3,
+      1,
+      "LATENT"
+    ],
+    [
+      23,
+      18,
+      0,
+      19,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      20,
+      0,
+      3,
+      0,
+      "OpenSoraPlanModel"
+    ],
+    [
+      26,
+      20,
+      0,
+      16,
+      0,
+      "OpenSoraPlanModel"
+    ],
+    [
+      33,
+      19,
+      0,
+      16,
+      1,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        -180.71035766601562,
+        -187.127197265625
+      ]
+    }
+  },
+  "version": 0.4
+}
