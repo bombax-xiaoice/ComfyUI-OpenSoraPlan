@@ -188,8 +188,8 @@ class OpenSoraPlanV3SampleI2V:
                 "imagefiles":("STRING",{"default":""}),
                 "prompt":("STRING",{"default":""}),
                 "negative_prompt":("STRING",{"default":""}),
-                "num_inference_steps":("INT",{"default":50}),
-                "guidance_scale":("FLOAT",{"default":10.0}),
+                "num_inference_steps":("INT",{"default":50,"min":1,"max":100,"step":1}),
+                "guidance_scale":("FLOAT",{"default":7.5,"min":0.1,"max":10.0,"step":0.1}),
                 "seed":("INT",{"default":1234}),
                 "force_textencoder_cpu":("BOOLEAN",{"default":False}),
                 "force_transformer_cpu_offload":("BOOLEAN",{"default":False}),
@@ -236,17 +236,17 @@ class OpenSoraPlanV3SampleI2V:
         pbar = comfy.utils.ProgressBar(num_inference_steps)
         if images != None:
             imagefiles = [None,]*images.shape[0] if not imagefiles else [imagefiles,]+[None,]*(images.shape[0]-1) if isinstance(imagefiles,str) else imagefiles+[None,]*(images.shape[0]-len(imagefiles)) if len(imagefiles) < images.shape[0] else imagefiles[:images.shape[0]]
-            for i in range(images.shape[0]):
+            for i, j in enumerate(range(images.shape[0]) if images.shape[0]<=num_frames else [int(round(k*(images.shape[0]-1)/(num_frames-1))) for k in range(num_frames)]):
                 if not imagefiles[i]:
                     imagefiles[i] = os.path.join(('/dev/shm/' if os.path.exists('/dev/shm/') else '/tmp/')+ ''.join(random.choice("abcdefghijklmnopqrstupvxyz") for x in range(5)) + '.png')
-                im = 255. * images[i,:,:,:].cpu().numpy()
+                im = 255. * images[j,:,:,:].cpu().numpy()
                 img = Image.fromarray(np.clip(im, 0, 255).astype(np.uint8))
                 img.save(imagefiles[i], pnginfo={}, compress_level=4)
         elif isinstance(imagefiles, str):
-            imagefiles = imagefiles.split(',')
+            imagefiles = imagefiles.split(',')[:num_frames]
         
         videos = videogen_pipeline(conditional_pixel_values_path=imagefiles,
-                                conditional_pixel_values_indices=[0,] if len(imagefiles)==1 else [0,-1] if len(imagefiles)==2 else list(range(0, num_frames, (num_frames-1)//(len(imagefiles)-1))),
+                                conditional_pixel_values_indices=[0,] if len(imagefiles)==1 else [0,-1] if len(imagefiles)==2 else [int(round(i*(num_frames-1)/(len(imagefiles)-1))) for i in range(len(imagefiles))],
                                 prompt=prompt,
                                 negative_prompt=negative_prompt,
                                 num_frames=num_frames,
@@ -414,8 +414,8 @@ class OpenSoraPlanV2SampleI2V:
                 "start_image":("IMAGE",),
                 "prompt":("STRING",{"default":""}),
                 "negative_prompt":("STRING",{"default":""}),
-                "num_inference_steps":("INT",{"default":50}),
-                "guidance_scale":("FLOAT",{"default":10.0}),
+                "num_inference_steps":("INT",{"default":50,"min":1,"max":200,"step":1}),
+                "guidance_scale":("FLOAT",{"default":10.0,"min":0.1,"max":20.0,"step":0.1}),
                 "seed":("INT",{"default":1234}),
                 "force_textencoder_cpu":("BOOLEAN",{"default":False}),
                 "force_transformer_cpu_offload":("BOOLEAN",{"default":False}),
@@ -651,8 +651,8 @@ class OpenSoraPlanSampleT2V:
                 "model":("OpenSoraPlanModel",),
                 "prompt":("STRING",{"default":""}),
                 "negative_prompt":("STRING",{"default":""}),
-                "num_inference_steps":("INT",{"default":50}),
-                "guidance_scale":("FLOAT",{"default":10.0}),
+                "num_inference_steps":("INT",{"default":50,"min":1,"max":200,"step":1}),
+                "guidance_scale":("FLOAT",{"default":7.5,"min":0.1,"max":10,"step":0.1}),
                 "seed":("INT",{"default":1234}),
                 "force_textencoder_cpu":("BOOLEAN",{"default":False}),
                 "force_transformer_cpu_offload":("BOOLEAN",{"default":False}),
