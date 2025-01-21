@@ -58,13 +58,22 @@ model files can be automatically downloaded from huggingface to custom_nodes/Com
 Input one image as reference of the starting frame
 <img src="example-workflow-opensoraplan3-i2v.png" raw="true" />
 
-Output of one reference image
+One reference image results run under comfy 
 
 https://github.com/user-attachments/assets/66eb5666-efd3-43ea-a6ab-b90e3d0c4b71
 
 Input two images as references of the starting frame and the ending frame
 <img src="example-workflow-opensoraplan3-2i2v.png" raw="true" />
 
-Output of two reference images
+Two reference images results run under comfy
 
 https://github.com/user-attachments/assets/8e94f804-d5b2-4547-8b09-b960a7af2f99
+
+## OpenSoraPlan V1.3 Image-to-Video Examples
+
+Prompts without reference image
+<img src="example-workflow-opensoraplan3-t2v.png" raw="true" />
+
+No reference image results run under comfy
+
+https://github.com/user-attachments/assets/19964ec6-13c6-40ea-979f-fba95705b8ad
