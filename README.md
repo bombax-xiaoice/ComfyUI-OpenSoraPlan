@@ -69,7 +69,16 @@ Two reference images results run under comfy
 
 https://github.com/user-attachments/assets/8e94f804-d5b2-4547-8b09-b960a7af2f99
 
-## OpenSoraPlan V1.3 Image-to-Video Examples
+## OpenSoraPlan V1.3 Interpolate (6 Images to Video) Examples
+
+Prompts without reference image
+<img src="example-workflow-opensoraplan3-6i2v.png" raw="true" />
+
+No reference image results run under comfy
+
+https://github.com/user-attachments/assets/4b004d4b-d8cf-48a5-98e8-cb6532037ba9
+
+## OpenSoraPlan V1.3 Text-to-Video Examples
 
 Prompts without reference image
 <img src="example-workflow-opensoraplan3-t2v.png" raw="true" />
