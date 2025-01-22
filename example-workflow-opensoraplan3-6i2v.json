@@ -1,0 +1,666 @@
+{
+  "last_node_id": 50,
+  "last_link_id": 68,
+  "nodes": [
+    {
+      "id": 20,
+      "type": "OpenSoraPlan3LoaderI2V",
+      "pos": [
+        290.2936096191406,
+        287.127197265625
+      ],
+      "size": [
+        415.8000183105469,
+        250
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OpenSoraPlanModel",
+          "type": "OpenSoraPlanModel",
+          "links": [
+            25,
+            26
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OpenSoraPlan3LoaderI2V"
+      },
+      "widgets_values": [
+        "/home/zhouli/ComfyUI/custom_nodes/ComfyUI-OpenSoraPlan/models/Open-Sora-Plan-v1.3.0",
+        "WFVAEModel_D8_4x8x8",
+        "/home/zhouli/ComfyUI/custom_nodes/ComfyUI-OpenSoraPlan/models/mt5-xxl",
+        "/home/zhouli/ComfyUI/custom_nodes/ComfyUI-OpenSoraPlan/models/CLIP-ViT-bigG-14-laion2B-39B-b160k",
+        "any93x640x640_i2v",
+        480,
+        480,
+        93,
+        "EulerAncestralDiscrete"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "OpenSoraPlanDecoder",
+      "pos": [
+        1147.0234375,
+        289.2569580078125
+      ],
+      "size": [
+        315,
+        126
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "OpenSoraPlanModel",
+          "link": 25
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            4
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OpenSoraPlanDecoder"
+      },
+      "widgets_values": [
+        true,
+        32,
+        16
+      ]
+    },
+    {
+      "id": 50,
+      "type": "ImageScale",
+      "pos": [
+        385.83111572265625,
+        616.8910522460938
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 66
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            67
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "lanczos",
+        480,
+        480,
+        "center"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "OpenSoraPlan3SamplerI2V",
+      "pos": [
+        744.0365600585938,
+        280.56561279296875
+      ],
+      "size": [
+        352.79998779296875,
+        578
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "OpenSoraPlanModel",
+          "link": 26
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 67
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            22
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OpenSoraPlan3SamplerI2V"
+      },
+      "widgets_values": [
+        "",
+        "a high-resolution photograph featuring a young asian woman with a fair complexion and long, dark brown hair styled in loose waves, she has large, expressive brown eyes with subtle makeup, and her lips are full and painted a soft pink, her facial features are delicate and symmetrical, with a slight blush on her cheeks, she is wearing a luxurious, green, sleeveless dress with intricate, beaded embroidery and a plunging neckline, accentuating her ample breasts, the dress is made of a soft, silky fabric that drapes elegantly over her shoulders, and the neckline is adorned with a delicate, gold chain necklace and matching earrings, the background features an ornate, wooden chair with intricate carvings, set against a soft green wall with a classical, vintage style, suggesting an opulent, possibly historical setting, the lighting is soft and natural, casting gentle shadows that enhance the texture of her dress and the smoothness of her hair, the overall mood of elegant and regal, capturing a sense of timeless elegance and luxury",
+        "",
+        50,
+        3,
+        0,
+        "fixed",
+        true,
+        true,
+        true,
+        false,
+        0,
+        8
+      ]
+    },
+    {
+      "id": 4,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1524.729736328125,
+        289.7585144042969
+      ],
+      "size": [
+        315,
+        619
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4,
+          "shape": 7
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "greengirl_repaint",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "greengirl_repaint_00019.mp4",
+            "subfolder": "",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 8
+          }
+        }
+      }
+    },
+    {
+      "id": 38,
+      "type": "ImpactMakeImageBatch",
+      "pos": [
+        206.9987335205078,
+        620.0184326171875
+      ],
+      "size": [
+        140,
+        146
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 54
+        },
+        {
+          "name": "image2",
+          "type": "IMAGE",
+          "link": 55
+        },
+        {
+          "name": "image3",
+          "type": "IMAGE",
+          "link": 56
+        },
+        {
+          "name": "image4",
+          "type": "IMAGE",
+          "link": 60
+        },
+        {
+          "name": "image5",
+          "type": "IMAGE",
+          "link": 61
+        },
+        {
+          "name": "image6",
+          "type": "IMAGE",
+          "link": 62
+        },
+        {
+          "name": "image7",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            66
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImpactMakeImageBatch"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 35,
+      "type": "LoadImage",
+      "pos": [
+        157.61578369140625,
+        981.4217529296875
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            54
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "greenks_qiu_50.png",
+        "image"
+      ]
+    },
+    {
+      "id": 33,
+      "type": "LoadImage",
+      "pos": [
+        481.84625244140625,
+        985.51953125
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            55
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "greenks_qiu_60.png",
+        "image"
+      ]
+    },
+    {
+      "id": 39,
+      "type": "LoadImage",
+      "pos": [
+        812.1371459960938,
+        989.9526977539062
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            56
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "greenks_qiu_70.png",
+        "image"
+      ]
+    },
+    {
+      "id": 44,
+      "type": "LoadImage",
+      "pos": [
+        1143.1756591796875,
+        992.6364135742188
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            60
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "greenks_qiu_80.png",
+        "image"
+      ]
+    },
+    {
+      "id": 45,
+      "type": "LoadImage",
+      "pos": [
+        1470.5838623046875,
+        995.3958740234375
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            61
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "greenks_qiu_90.png",
+        "image"
+      ]
+    },
+    {
+      "id": 46,
+      "type": "LoadImage",
+      "pos": [
+        1798.7440185546875,
+        998.2395629882812
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            62
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "greenks_qiu_100.png",
+        "image"
+      ]
+    }
+  ],
+  "links": [
+    [
+      4,
+      3,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      22,
+      16,
+      0,
+      3,
+      1,
+      "LATENT"
+    ],
+    [
+      25,
+      20,
+      0,
+      3,
+      0,
+      "OpenSoraPlanModel"
+    ],
+    [
+      26,
+      20,
+      0,
+      16,
+      0,
+      "OpenSoraPlanModel"
+    ],
+    [
+      54,
+      35,
+      0,
+      38,
+      0,
+      "IMAGE"
+    ],
+    [
+      55,
+      33,
+      0,
+      38,
+      1,
+      "IMAGE"
+    ],
+    [
+      56,
+      39,
+      0,
+      38,
+      2,
+      "IMAGE"
+    ],
+    [
+      60,
+      44,
+      0,
+      38,
+      3,
+      "IMAGE"
+    ],
+    [
+      61,
+      45,
+      0,
+      38,
+      4,
+      "IMAGE"
+    ],
+    [
+      62,
+      46,
+      0,
+      38,
+      5,
+      "IMAGE"
+    ],
+    [
+      66,
+      38,
+      0,
+      50,
+      0,
+      "IMAGE"
+    ],
+    [
+      67,
+      50,
+      0,
+      16,
+      1,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7748878570288481,
+      "offset": [
+        -215.17871985023305,
+        -305.5084854408531
+      ]
+    }
+  },
+  "version": 0.4
+}
