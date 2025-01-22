@@ -71,10 +71,10 @@ https://github.com/user-attachments/assets/8e94f804-d5b2-4547-8b09-b960a7af2f99
 
 ## OpenSoraPlan V1.3 Interpolate (6 Images to Video) Examples
 
-Prompts without reference image
+Prompts with 6 reference images whose poses are slightly different
 <img src="example-workflow-opensoraplan3-6i2v.png" raw="true" />
 
-No reference image results run under comfy
+6 reference image results run under comfy
 
 https://github.com/user-attachments/assets/4b004d4b-d8cf-48a5-98e8-cb6532037ba9
 
